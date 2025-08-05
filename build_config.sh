@@ -17,6 +17,9 @@ export USE_CUFILE=0
 # Enable ROCm-specific optimizations
 export USE_ROCM_KERNEL_ASSERT=1
 
+# Build AOTriton from source to avoid network download issues
+export AOTRITON_INSTALL_FROM_SOURCE=1
+
 # Build optimizations
 export MAX_JOBS=$(nproc)
 export CMAKE_BUILD_TYPE=Release

@@ -52,6 +52,11 @@ export CMAKE_FRESH=1  # Force fresh CMake configuration
 export FORCE_CUDA=0   # Ensure CUDA is disabled
 export USE_CUDA=0     # Double-check CUDA is disabled
 
+# Network resilience settings
+export CURL_CONNECT_TIMEOUT=60
+export CURL_TIMEOUT=300
+export CMAKE_DOWNLOAD_TIMEOUT=300
+
 # Build PyTorch
 echo "=== Building PyTorch with ROCm Support ==="
 echo "This may take 30-60 minutes depending on your system..."
