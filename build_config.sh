@@ -40,7 +40,7 @@ export USE_OPENCL=0
 # Set compiler flags for optimal performance
 export CFLAGS="-O3 -march=native -mtune=native"
 export CXXFLAGS="-O3 -march=native -mtune=native"
-
+export TORCH_USE_HIP_DSA=1
 # Enable debug info for better profiling
 export REL_WITH_DEB_INFO=1
 
