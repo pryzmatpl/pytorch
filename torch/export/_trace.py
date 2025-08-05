@@ -880,6 +880,8 @@ def _export_to_aten_ir(
             new_output_node = list(new_gm.graph.nodes)[-1]
             assert old_output_node.op == "output" and new_output_node.op == "output"
             # make sure we don't override any meta
+            if "desc" in new_output_node.meta:
+                del new_output_node.meta["desc"]
             assert len(new_output_node.meta) == 0
             new_output_node.meta.update(old_output_node.meta)
 
@@ -1723,6 +1725,7 @@ def _export_to_aten_ir_make_fx(
             gm.graph.eliminate_dead_code(_is_impure)
 
         # create graph signature
+        assert out_spec.spec is not None, "out_spec.spec is None!"
         input_names = _graph_input_names(gm)
         output_names = _graph_output_names(gm)
         sig = GraphSignature(
@@ -1737,7 +1740,7 @@ def _export_to_aten_ir_make_fx(
             buffers_to_mutate={},
             user_inputs_to_mutate={},
             in_spec=in_spec,
-            out_spec=out_spec,  # type: ignore[arg-type]
+            out_spec=out_spec.spec,
             backward_signature=None,
             input_tokens=[],
             output_tokens=[],
