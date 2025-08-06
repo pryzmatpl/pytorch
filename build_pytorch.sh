@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# PyTorch Build Script for AMD Radeon RX 7900 XTX (gfx1030)
+# PyTorch Build Script for AMD Radeon RX 7900 XTX (gfx1100)
 # This script builds PyTorch with ROCm support using CMake
 
 set -e  # Exit on any error
 
 echo "=== PyTorch ROCm Build Script ==="
-echo "Target GPU: AMD Radeon RX 7900 XTX (gfx1030)"
+echo "Target GPU: AMD Radeon RX 7900 XTX (gfx1100)"
 echo "ROCm Version: $(hipconfig --version)"
 echo "CMake Version: $(cmake --version | head -n 1)"
 echo "=================================="
@@ -45,8 +45,8 @@ if ! command -v rocminfo &> /dev/null; then
     echo "Error: rocminfo not found. Ensure ROCm is installed."
     exit 1
 fi
-rocminfo | grep -q "gfx1030" || {
-    echo "Warning: gfx1030 (Radeon RX 7900 XTX) not detected. Ensure GPU is properly configured."
+rocminfo | grep -q "gfx1100" || {
+    echo "Warning: gfx1100 (Radeon RX 7900 XTX) not detected. Ensure GPU is properly configured."
 }
 
 # Clean previous builds
@@ -70,7 +70,7 @@ export NCCL_LIBRARIES=$ROCM_PATH/lib/librccl.so
 # Disable CUDA and enable ROCm
 export USE_CUDA=0
 export USE_ROCM=1
-export PYTORCH_ROCM_ARCH=gfx1030  # Target architecture for RX 7900 XTX
+export PYTORCH_ROCM_ARCH=gfx1100  # Target architecture for RX 7900 XTX
 export CMAKE_FRESH=1  # Force fresh CMake configuration
 
 # Network resilience settings
@@ -91,7 +91,7 @@ cmake .. \
     -DROCM_PATH=$ROCM_PATH \
     -DNCCL_INCLUDE_DIRS=$ROCM_PATH/include \
     -DNCCL_LIBRARIES=$ROCM_PATH/lib/librccl.so \
-    -DPYTORCH_ROCM_ARCH=gfx1030 \
+    -DPYTORCH_ROCM_ARCH=gfx1100 \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_TEST=OFF \
     -DUSE_NCCL=ON \
@@ -140,4 +140,4 @@ python3 -c "import torch; print(f'PyTorch version: {torch.__version__}'); print(
 }
 
 echo "=== Build and Installation Complete ==="
-echo "PyTorch has been built and installed with ROCm support for gfx1030."
+echo "PyTorch has been built and installed with ROCm support for gfx1100."
