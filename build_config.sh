@@ -4,7 +4,7 @@
 # This script sets up all necessary environment variables for building PyTorch with ROCm support
 
 export USE_ROCM=1
-export PYTORCH_ROCM_ARCH=gfx1030
+export PYTORCH_ROCM_ARCH=gfx1100
 export ROCM_PATH=/opt/rocm
 
 # Disable CUDA since we're using ROCm
