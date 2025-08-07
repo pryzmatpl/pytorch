@@ -3,6 +3,8 @@
 # PyTorch Build Configuration for AMD Radeon RX 7900 XTX (gfx1110)
 # This script sets up all necessary environment variables for building PyTorch with ROCm support
 
+export HSA_OVERRIDE_GFX_VERSION=11.0.0
+
 export USE_ROCM=1
 export PYTORCH_ROCM_ARCH=gfx1100
 export ROCM_PATH=/opt/rocm
